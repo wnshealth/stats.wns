@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './amplify';
 import './index.css';
+
+import './amplify';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 

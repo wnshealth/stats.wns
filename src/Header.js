@@ -1,38 +1,61 @@
 import React, { Component } from 'react';
 
+import store from './store';
+
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      filter: null
+    };
+
+    store.on( 'filter:change', ( val ) => { this.setState( { filter: val } ); } );
+  }
+
   render() {
     return (
       <header>
-        <div class="collapse bg-dark" id="navbarHeader">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-8 col-md-7 py-4">
-                <h4 class="text-white">Analytics</h4>
-                <p class="text-muted">Daily/weekly WNS lead acquisition stats.</p>
+        <div className="collapse bg-dark" id="navbarHeader">
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-8 col-md-7 py-4">
+                <h4 className="text-white">Stats</h4>
+                <p className="text-muted">WNS lead acquisition stats, powered by AWS.</p>
               </div>
-              <div class="col-sm-4 offset-md-1 py-4">
-                <h4 class="text-white">Filters</h4>
-                <ul class="list-unstyled text-muted">
-                  <li>Daily</li>
-                  <li>Weekly</li>
+              <div className="col-sm-4 offset-md-1 py-4">
+                <h4 className="text-white">Filters</h4>
+                <ul className="list-unstyled text-muted">
+                  <li
+                    className={ 'daily' === this.state.filter ? 'text-white' : '' }
+                    onClick={ this._onClick.bind( this, 'daily' ) }>Daily</li>
+                  <li
+                    className={ 'weekly' === this.state.filter ? 'text-white': '' }
+                    onClick={ this._onClick.bind( this, 'weekly' ) }>Weekly</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <div class="navbar navbar-dark bg-dark shadow-sm">
-          <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
+        <div className="navbar navbar-dark bg-dark shadow-sm">
+          <div className="container d-flex justify-content-between">
+            <a href="#" className="navbar-brand d-flex align-items-center">
               <strong>WNS</strong>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
             </button>
           </div>
         </div>
       </header>
     );
+  }
+
+  _onClick( filter ) {
+    store.set( 'filter', filter );
+  }
+
+  componentDidMount() {
+    store.set( 'filter', 'daily' );
   }
 }
 

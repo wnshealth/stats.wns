@@ -2,6 +2,7 @@ import Events from './events';
 
 class Store extends Events {
   constructor( data ) {
+    super();
     data = data || {};
     this.setData( data );
   }
@@ -15,7 +16,7 @@ class Store extends Events {
   }
 
   get( key ) {
-    return this.data[ key ];
+    return this.data[ key ] || null;
   }
 
   set( key, val ) {
@@ -36,4 +37,4 @@ class Store extends Events {
   }
 }
 
-export default Store;
+export default ( new Store() );

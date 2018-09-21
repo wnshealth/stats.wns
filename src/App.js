@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { withAuthenticator } from 'aws-amplify-react';
+// import { withAuthenticator } from 'aws-amplify-react';
 
 import Header from './Header';
+import Main from './Main';
 
 import './App.css';
 
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <Main />
       </div>
     );
   }
