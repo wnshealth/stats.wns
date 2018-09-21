@@ -27,7 +27,7 @@ class Chart extends Component {
   }
 
   _h1() {
-    return this.props.leads + ' ' + this.props.filter + ' leads'
+    return this.props.lead_count + ' ' + this.props.filter + ' leads'
   }
 
   _renderChart() {
