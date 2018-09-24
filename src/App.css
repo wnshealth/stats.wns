@@ -55,3 +55,25 @@
 .App .jumbotron canvas {
   margin: 2rem auto 0 auto;
 }
+
+.App .stats-table {
+  padding: 4rem 2rem;
+  background: #f5f5f5;
+}
+
+.App .stats-table .table .color {
+  position: relative;
+}
+
+.App .stats-table .table .color > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 15px;
+  width: 15px;
+  -webkit-transform: translate3d( -50%, -50%, 0 );
+     -moz-transform: translate3d( -50%, -50%, 0 );
+      -ms-transform: translate3d( -50%, -50%, 0 );
+       -o-transform: translate3d( -50%, -50%, 0 );
+          transform: translate3d( -50%, -50%, 0 );
+}

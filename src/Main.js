@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Charts from './Charts';
+import Table from './Table';
 import store from './store';
 import Events from './events';
 
@@ -11,6 +12,7 @@ class Main extends Component {
   constructor() {
     super();
     this.state = {
+      sources: [],
       filter: store.get( 'filter' ),
       created_at_date: ''
     };
@@ -32,7 +34,8 @@ class Main extends Component {
         <Charts
           filter={ this.state.filter }
           created_at_date={ this.state.created_at_date }
-          events={ this.events }/>
+          events={ this.events } />
+        <Table sources={ this.state.sources } />
       </main>
     )
   }
@@ -68,25 +71,35 @@ class Main extends Component {
 
   _eachDate( dates ) {
     var sources = {};
-    var count = 0;
+    var sourcesArray = [];
+    var sourceCount = 0;
     var range;
 
-    dates.forEach( ( date ) => {
+    dates.forEach( ( date, i ) => {
       for ( let prop in date.sources ) {
+        let source = date.sources[ prop ];
         if ( !sources[ prop ] ) {
-          sources[ prop ] = date.sources[ prop ];
-          count++;
+          sources[ prop ] = {
+            source_name: source.source_name,
+            daily_total_lead_count: 0 === i ? source.lead_count : 0,
+            weekly_total_lead_count: 0
+          }
+          sourceCount++;
         }
+        sources[ prop ].weekly_total_lead_count += source.lead_count;
       }
     });
 
-    range = 1 / count;
+    range = 1 / sourceCount;
     for ( let prop in sources ) {
-      sources[ prop ].color = d3.interpolateGnBu( range * count );
-      count--;
+      sources[ prop ].color = d3.interpolateGnBu( range * sourceCount );
+      sources[ prop ].key = sources[ prop ].source_name;
+      sourcesArray.push( sources[ prop ] );
+      sourceCount--;
     }
 
     store.set( 'sources', sources );
+    this.setState( { sources: sourcesArray } );
   }
 }
 
