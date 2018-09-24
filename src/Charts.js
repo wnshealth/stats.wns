@@ -36,18 +36,22 @@ class Chart extends Component {
               </div>
             </div>
           </div>
-          <canvas
-            id="daily"
-            width="400"
-            height="400"
-            ref="daily"
-            style={ { display: [ 'none', 'block' ][ +( 'daily' === store.get( 'filter' ) ) ] } }></canvas>
-          <canvas
-            id="weekly"
-            width="640"
-            height="400"
-            ref="weekly"
-            style={ { display: [ 'none', 'block' ][ +( 'weekly' === store.get( 'filter' ) ) ] } }></canvas>
+          <div className="daily-container">
+            <canvas
+              id="daily"
+              width="400"
+              height="400"
+              ref="daily"
+              style={ { display: [ 'none', 'block' ][ +( 'daily' === store.get( 'filter' ) ) ] } }></canvas>
+          </div>
+          <div className="weekly-container">
+            <canvas
+              id="weekly"
+              width="640"
+              height="400"
+              ref="weekly"
+              style={ { display: [ 'none', 'block' ][ +( 'weekly' === store.get( 'filter' ) ) ] } }></canvas>
+          </div>
         </div>
       </section>
     );
@@ -86,7 +90,7 @@ class Chart extends Component {
         legend: {
           display: false
         },
-        responsive: false
+        responsive: true
       }
     });
 
@@ -108,7 +112,7 @@ class Chart extends Component {
           xAxes: [ { stacked: true } ],
           yAxes: [ { stacked: true } ]
         },
-        responsive: false
+        responsive: true
       }
     });
   };
