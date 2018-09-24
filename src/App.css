@@ -1,3 +1,7 @@
+.App header {
+  position: relative;
+}
+
 .App header h4 {
   font-size: 1.25rem;
   font-weight: bolder;
@@ -8,17 +12,46 @@
   cursor: pointer;
 }
 
+.App header::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 2px;
+  background: rgb(247,252,240);
+  background: -moz-linear-gradient(left, rgb(247,252,240) 0%, rgb(123,203,196) 50%, rgb(8,64,129) 100%);
+  background: -webkit-linear-gradient(left, rgb(247,252,240) 0%,rgb(123,203,196) 50%,rgb(8,64,129) 100%);
+  background: linear-gradient(to right, rgb(247,252,240) 0%,rgb(123,203,196) 50%,rgb(8,64,129) 100%);
+}
+
 .App .jumbotron {
   background: #fff;
 }
 
-.App .jumbotron h1 {
-  font-weight: lighter;
+.App .jumbotron .stats-container {
+  width: 640px;
+  margin: 0 auto;
+  font-weight: bolder;
+  text-align: right;
   text-transform: uppercase;
+  line-height: 1;
 }
 
-.App .jumbotron p {}
+.App .jumbotron .count-container {
+  color: rgb(123, 203, 196);
+  font-size: 5rem;
+}
+
+.App .jumbotron .filter-container {
+  font-size: 1.25rem;
+}
+
+.App .jumbotron .filter-container .created_at_date {
+  font-size: 1rem;
+  font-weight: lighter;
+}
 
 .App .jumbotron canvas {
-  margin: 0 auto;
+  margin: 2rem auto 0 auto;
 }
